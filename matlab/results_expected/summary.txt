@@ -1,0 +1,46 @@
+ANGDSS simulation, mode = paper (Part A and Part B run in parallel, GNU Octave 8.4)
+
+===== Part A: base paper (GDSS vs DSSS) =====
+  Fig 1: SNR for BER 1e-5: N=1 12.60 dB, N=256 -11.48 dB (paper: 12.5 / -11.5 dB)
+  Fig 2: every GDSS chip stays in its DSSS quadrant: 1
+  Table 1 (1e+06 bits, N = 256):
+    order         Gaussian             GDSS     DSSS
+        2                1                1    1.000
+        4                3                3    1.000
+        6               15               15    1.000
+        8              105              105    1.000
+       10              945              945    1.000
+       12            10395            10403    1.000
+       14           135135           135810    1.000
+       16          2027025          2060282    1.000
+       18         34459425         35917166    1.000
+       20        654729075        716562923    1.000
+    moment test trial 1/5 done
+    moment test trial 2/5 done
+    moment test trial 3/5 done
+    moment test trial 4/5 done
+    moment test trial 5/5 done
+  Fig 4: DSSS exceeds 10% from -10 dB (analytic crossing -11.47 dB); GDSS max deviation 6.7%; noise-only 4.5%
+  Fig 5: peak/mean of phase histogram  noise 1.013 | DSSS0 1.12 GDSS0 1.009 | DSSS-5 1.02 GDSS-5 1.014 | ANGDSS 1.014
+  Fig 6: mean coherence excess at alpha=k/N: noise -0.001, DSSS 0.968, GDSS(short PN) 0.504, GDSS(long PN) 0.001
+  Fig 7: N = 50 needs 7 convolutions (Eq. 19 gives 7, brute force 49)
+  Fig 8: max |numerical - MC| PDF error per N: 4.6e-04 5.4e-04 3.1e-04 3.3e-04 2.4e-04 1.9e-04 
+  Fig 9: GDSS penalty at BER 1e-5: 4.95 3.42 2.68 2.31 2.14 2.05 2.01 1.98  dB (N = 16 32 64 128 256 512 1024 2048 )
+  Part A time: 2567.2 s
+
+Total run time: 2567.2 s
+
+===== Part B: proposed ANGDSS =====
+  Fig 10: std of chip SNR: GDSS 3.00 dB, ANGDSS 0.41 dB; estimator error std 0.39 dB
+  Fig 11: SNR for BER 1e-5: DSSS -6.95 | GDSS -4.89 | ANGDSS -9.18 (genie -9.33) | static GDSS -9.34 | adaptive DSSS -11.31 dB
+          ANGDSS gain over GDSS 4.29 dB, over DSSS 2.23 dB
+          MC vs theory (ANGDSS): [1.02e-01/1.01e-01] [5.53e-02/5.44e-02] [2.25e-02/2.21e-02] [5.48e-03/5.86e-03] [7.93e-04/8.25e-04] [4.33e-05/4.60e-05] 
+  Fig 12: avg SNR -15 dB, all blocks: mean P_D GDSS 0.436, ANGDSS 0.266
+          first 400 blocks: theory GDSS 0.522 / MC 0.524, ANGDSS 0.269 / MC 0.269
+          highest avg SNR with 95% of blocks at P_D <= 0.2: GDSS -22.01 dB, ANGDSS -16.68 dB
+  Fig 13: KLD at -10 dB: DSSS 6.86e-04, GDSS 5.12e-04, ANGDSS 3.40e-05, floor 3.27e-05
+          KLD at   0 dB: DSSS 4.42e-02, GDSS 8.86e-03, ANGDSS 6.23e-05, floor 2.62e-05
+  Fig 14a: ANGDSS gain over GDSS at sigma = 0 1 2 3 4 5 6  dB: -0.16 0.56 2.17 4.06 5.21 5.44 5.36  dB
+  Fig 14b: L = 8 16 32 64 128 256 512 1024  -> median -4.43 -6.88 -8.10 -8.72 -9.02 -9.18 -9.25 -9.29  | mean(imp) -5.66 -6.60 -6.71 -6.78 -6.96 -7.38 -7.97 -8.52  dB
+
+Total run time: 489.6 s
